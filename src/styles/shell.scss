@@ -1,0 +1,16 @@
+#root {
+  min-block-size: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  user-select: none;
+}
+
+aside {
+  padding: 10px 10px 4px;
+
+  a {
+    font-size: 1.5rem;
+    padding: 4px 10px;
+  }
+}

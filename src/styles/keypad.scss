@@ -1,0 +1,21 @@
+#keypad {
+  padding: 8px;
+  --space: 0.5rem;
+}
+
+.lane {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space);
+
+  & + & {
+    margin-block-start: var(--space);
+  }
+}
+
+
+.key {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  flex: 1;
+}
