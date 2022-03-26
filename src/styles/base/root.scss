@@ -1,0 +1,11 @@
+[data-theme='light'] {
+  @include define-color($light);
+}
+
+[data-theme='dark'] {
+  @include define-color($dark);
+}
+
+[data-theme='dim'] {
+  @include define-color($dim);
+}

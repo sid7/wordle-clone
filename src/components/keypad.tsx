@@ -8,8 +8,8 @@ const pad = [
 export default function Keypad() {
   return (
     <section id="keypad" aria-label="keypad">
-      {pad.map(({ keys, spacer }) => (
-        <div className="lane">
+      {pad.map(({ keys, spacer }, i) => (
+        <div className="lane" key={i}>
           {spacer && <span style={{ flex: 0.5 * spacer }} aria-hidden />}
           {keys.map((key) => (
             <button type="button" className="key" data-key={key} key={key}>

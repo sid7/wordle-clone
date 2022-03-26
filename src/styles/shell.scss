@@ -7,10 +7,18 @@
 }
 
 aside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 10px 10px 4px;
 
   a {
     font-size: 1.5rem;
     padding: 4px 10px;
+  }
+
+  select {
+    text-transform: capitalize;
+    padding-block: 2px;
   }
 }

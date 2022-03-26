@@ -1,0 +1,12 @@
+@mixin define-color($palette) {
+  @each $prop, $hex in $palette {
+    $rgb: (red($hex), green($hex), blue($hex));
+
+    --rgb-#{$prop}: #{$rgb};
+    --clr-#{$prop}: rgb(var(--rgb-#{$prop}));
+  }
+}
+
+@function get-color($prop, $alpha: null) {
+  @return if($alpha, rgba(var(--rgb-#{$prop}), $alpha), var(--clr-#{$prop}));
+}
