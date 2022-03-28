@@ -1,0 +1,32 @@
+#board {
+  --space: 0.5rem;
+}
+
+.word {
+  display: flex;
+  gap: var(--space);
+  justify-content: center;
+
+  & + & {
+    margin-block-start: var(--space);
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    inline-size: 2px;
+    block-size: 30px;
+    margin-block: auto;
+    background-color: var(--mark, transparent);
+  }
+
+  &.is-current {
+    --mark: #{get-color('text', 0.4)};
+  }
+}
+
+.letter {
+  block-size: 50px;
+  inline-size: 50px;
+  border: 2px solid;
+}
