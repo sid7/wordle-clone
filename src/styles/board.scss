@@ -26,7 +26,12 @@
 }
 
 .letter {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   block-size: 50px;
   inline-size: 50px;
   border: 2px solid;
+  text-transform: capitalize;
 }

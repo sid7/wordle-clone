@@ -5,7 +5,7 @@ import useGame from './hooks/game'
 import { wordIs } from './scripts/helper'
 
 export default function App() {
-  const { state } = useGame()
+  const { state, handle } = useGame()
 
   return (
     <>
@@ -15,7 +15,7 @@ export default function App() {
           <Word value={word} tag={wordIs(i, state.position.row)} key={i} />
         ))}
       </section>
-      <Keypad />
+      <Keypad handle={handle} />
     </>
   )
 }

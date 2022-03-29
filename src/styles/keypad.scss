@@ -26,7 +26,8 @@
   }
 
   &:active,
-  &:focus-visible {
+  &:focus-visible,
+  &[data-pressed] {
     background-color: get-color('text', 0.15);
     transform: scale(0.9);
   }
