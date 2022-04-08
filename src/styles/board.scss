@@ -34,4 +34,12 @@
   inline-size: 50px;
   border: 2px solid;
   text-transform: capitalize;
+
+  @each $state in $letter-states {
+    &[data-state='#{$state}'] {
+      color: #fff;
+      background-color: get-color($state);
+      border-color: get-color($state);
+    }
+  }
 }

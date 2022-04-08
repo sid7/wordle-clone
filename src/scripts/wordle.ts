@@ -29,19 +29,19 @@ abstract class Eval {
     }))
   }
 
-  eval(_word: ILetter[]): { exactMatch: boolean; letters: ILetter[] } {
+  eval(_word: ILetter[]): { isExactMatch: boolean; word: ILetter[] } {
     const word = this.getWord(_word)
 
     if (word === this.currentWord) {
       return {
-        exactMatch: true,
-        letters: _word.map(({ value }) => ({ value, state: 'correct' })),
+        isExactMatch: true,
+        word: _word.map(({ value }) => ({ value, state: 'correct' })),
       }
     }
 
     return {
-      exactMatch: false,
-      letters: this.match(_word),
+      isExactMatch: false,
+      word: this.match(_word),
     }
   }
 }
@@ -49,7 +49,7 @@ abstract class Eval {
 class Wordle extends Eval {
   base: number
   day: number
-  catch = new Map<number, string>()
+  cache = new Map<number, string>()
 
   constructor() {
     super()
@@ -60,16 +60,17 @@ class Wordle extends Eval {
     const seed = Math.floor(offset / msInDay)
 
     this.currentWord = ANSWERS[seed]
-    this.catch.set(seed, this.currentWord)
+    this.cache.set(seed, this.currentWord)
   }
 
   setNewRandomWord(): void {
     const seed = Math.round(Math.random() * ANSWERS.length)
 
-    if (this.catch.has(seed)) {
+    if (this.cache.has(seed)) {
       return this.setNewRandomWord()
     }
 
+    this.cache.set(seed, ANSWERS[seed])
     this.currentWord = ANSWERS[seed]
   }
 }

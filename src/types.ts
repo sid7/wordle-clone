@@ -4,3 +4,5 @@ export interface ILetter {
   value: string
   state: ILetterState
 }
+
+export type IStatus = 'running' | 'win' | 'lose'

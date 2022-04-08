@@ -1,14 +1,23 @@
 $light: (
   'text': #24292f,
   'bg': #fff,
+  'correct': #1a7f37,
+  'present': #bf8700,
+  'absent': #cf222e,
 );
 
 $dark: (
   'text': #c9d1d9,
   'bg': #0d1117,
+  'correct': #3fb950,
+  'present': #d29922,
+  'absent': #da3633,
 );
 
 $dim: (
   'text': #adbac7,
   'bg': #22272e,
+  'correct': #57ab5a,
+  'present': #c69026,
+  'absent': #c93c37,
 );
