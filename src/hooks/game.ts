@@ -1,8 +1,8 @@
 import { useReducer } from 'react'
 import { CONFIG } from '../constants'
-import { createBoard } from '../scripts/helper'
+import { createBoard, pickLetterState } from '../scripts/helper'
 import { wordle } from '../scripts/wordle'
-import type { IStatus } from '../types'
+import type { ILetterState, IStatus } from '../types'
 
 if (!(window as any).wordle) {
   ;(window as any).wordle = wordle
@@ -10,6 +10,7 @@ if (!(window as any).wordle) {
 
 const initialState = {
   board: createBoard(CONFIG.max_attempts, CONFIG.word_length),
+  hints: {} as { [key: string]: ILetterState },
   position: { row: 0, col: 0 },
   status: 'running' as IStatus,
   error: null as string | null,
@@ -32,7 +33,6 @@ function reducer(state: IGameState, action: IAction): IGameState {
       case 'del':
         return state.position.col === 0
       case 'submit':
-        console.log({ row: state.position.row })
         return state.position.row === CONFIG.max_attempts
     }
   }
@@ -45,14 +45,14 @@ function reducer(state: IGameState, action: IAction): IGameState {
 
       const board = [...state.board]
       const pos = { ...state.position }
-      const { error, status } = state
+      const { error, status, hints } = state
 
       board[pos.row][pos.col].value = action.letter
       if (pos.col < CONFIG.word_length) {
         pos.col += 1
       }
 
-      return { board, position: pos, error, status }
+      return { board, position: pos, error, status, hints }
     }
     case 'del-letter': {
       if (checkpoint('del')) {
@@ -61,7 +61,7 @@ function reducer(state: IGameState, action: IAction): IGameState {
 
       const board = [...state.board]
       const pos = { ...state.position }
-      const { error, status } = state
+      const { error, status, hints } = state
 
       pos.col -= 1
       board[pos.row][pos.col].value = ''
@@ -70,6 +70,7 @@ function reducer(state: IGameState, action: IAction): IGameState {
         position: pos,
         error,
         status,
+        hints,
       }
     }
     case 'submit': {
@@ -87,10 +88,17 @@ function reducer(state: IGameState, action: IAction): IGameState {
 
       const newState = JSON.parse(JSON.stringify(state)) as IGameState
 
-      const { board, position } = newState
+      const { board, position, hints } = newState
       const { isExactMatch, word } = wordle.eval(board[position.row])
 
       board[position.row] = word
+
+      for (const letter of word) {
+        hints[letter.value] =
+          letter.value in hints
+            ? pickLetterState(hints[letter.value], letter.state)
+            : letter.state
+      }
 
       if (isExactMatch) {
         newState.status = 'win'

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { keypress } from '../scripts/helper'
-import type { IHandle } from '../hooks/game'
+import type { IGameState, IHandle } from '../hooks/game'
 
 const pad = [
   { keys: 'qwertyuiop'.split('') },
@@ -9,10 +9,10 @@ const pad = [
   { keys: ['Enter', 'Backspace'] },
 ]
 
-interface IKeypad {
+interface IKeypad extends Pick<IGameState, 'hints'> {
   handle: IHandle
 }
-export default function Keypad({ handle }: IKeypad) {
+export default function Keypad({ handle, hints }: IKeypad) {
   useEffect(() => {
     document.addEventListener('keydown', keypress)
     document.addEventListener('keyup', keypress)
@@ -31,6 +31,7 @@ export default function Keypad({ handle }: IKeypad) {
               type="button"
               className="key"
               data-key={key}
+              data-mark={hints[key]}
               onClick={() => {
                 if (key === 'Enter') {
                   handle.submit()

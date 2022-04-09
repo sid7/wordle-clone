@@ -1,4 +1,4 @@
-import { ILetter } from '../types'
+import type { ILetter, ILetterState } from '../types'
 
 export function createBoard(row: number, col: number): ILetter[][] {
   return Array.from({ length: row }, () =>
@@ -37,3 +37,13 @@ export function keypress(e: KeyboardEvent) {
     button.click()
   }
 }
+
+const letterStates: ILetterState[] = ['correct', 'present', 'absent']
+
+export const pickLetterState = (
+  currentState: ILetterState,
+  newState: ILetterState
+) =>
+  letterStates.indexOf(newState) > letterStates.indexOf(currentState)
+    ? newState
+    : currentState

@@ -31,4 +31,12 @@
     background-color: get-color('text', 0.15);
     transform: scale(0.9);
   }
+
+  @each $state in $letter-states {
+    &[data-mark='#{$state}'] {
+      color: #fff;
+      background-color: get-color($state);
+      border-color: get-color($state);
+    }
+  }
 }

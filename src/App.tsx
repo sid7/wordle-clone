@@ -15,7 +15,7 @@ export default function App() {
           <Word value={word} tag={wordIs(i, state.position.row)} key={i} />
         ))}
       </section>
-      <Keypad handle={handle} />
+      <Keypad handle={handle} hints={state.hints} />
     </>
   )
 }
