@@ -15,6 +15,9 @@ export default function App() {
           <Word value={word} tag={wordIs(i, state.position.row)} key={i} />
         ))}
       </section>
+      <p id="msg" className={state.msg?.type}>
+        {state.msg?.text}
+      </p>
       <Keypad handle={handle} hints={state.hints} />
     </>
   )

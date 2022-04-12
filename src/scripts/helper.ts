@@ -1,3 +1,4 @@
+import { MSG } from '../constants'
 import type { ILetter, ILetterState } from '../types'
 
 export function createBoard(row: number, col: number): ILetter[][] {
@@ -44,6 +45,23 @@ export const pickLetterState = (
   currentState: ILetterState,
   newState: ILetterState
 ) =>
-  letterStates.indexOf(newState) > letterStates.indexOf(currentState)
+  letterStates.indexOf(newState) < letterStates.indexOf(currentState)
     ? newState
     : currentState
+
+export const random = (max: number, min = 0) =>
+  Math.floor(Math.random() * (max - min + 1)) + min
+
+export const msg = {
+  win(level: number) {
+    const msg = MSG.win[level][random(MSG.win[level].length - 1)]
+    return `${msg}, You Won`
+  },
+  lose(ans: string) {
+    const msg = MSG.lose[random(MSG.lose.length - 1)]
+    return `${msg}, Answer: ${ans}`
+  },
+  welcome() {
+    return MSG.welcome[random(MSG.welcome.length - 1)]
+  },
+}

@@ -22,3 +22,9 @@ aside {
     padding-block: 2px;
   }
 }
+
+#msg {
+  display: block;
+  margin-inline: auto;
+  min-block-size: 30px;
+}
