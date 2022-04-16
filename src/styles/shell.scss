@@ -1,6 +1,7 @@
 #root {
   min-block-size: 100vh;
   display: flex;
+  gap: 0.5rem;
   flex-direction: column;
   justify-content: space-between;
   user-select: none;
@@ -25,6 +26,26 @@ aside {
 
 #msg {
   display: block;
-  margin-inline: auto;
   min-block-size: 30px;
+}
+
+.ctrl {
+  text-align: center;
+
+  button {
+    padding: 4px 10px;
+    background-color: get-color('text', 0.08);
+
+    &:hover {
+      background-color: get-color('text', 0.1);
+    }
+
+    &:is(:active, :focus) {
+      background-color: get-color('text', 0.15);
+    }
+
+    &:disabled {
+      visibility: hidden;
+    }
+  }
 }

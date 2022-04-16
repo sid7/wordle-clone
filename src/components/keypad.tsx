@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { keypress } from '../scripts/helper'
-import type { IGameState, IHandle } from '../hooks/game'
+import type { IGameState } from '../types'
+import type { IHandle } from '../hooks/game'
 
 const pad = [
   { keys: 'qwertyuiop'.split('') },

@@ -18,6 +18,10 @@ export const wordIs = (index: number, currentWordIndex: number) =>
     : 'attempt'
 
 export function keypress(e: KeyboardEvent) {
+  if (e.ctrlKey || e.altKey || e.metaKey || e.key === 'OS') {
+    return
+  }
+
   const key = /Enter|Backspace|^[a-z]$/i.test(e.key)
     ? e.key
     : /delete/i.test(e.key)

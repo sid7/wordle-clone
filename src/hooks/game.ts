@@ -18,7 +18,7 @@ const initialState: IGameState = {
 
 export type IAction =
   | { type: 'add-letter'; letter: string }
-  | { type: 'del-letter' | 'submit' }
+  | { type: 'del-letter' | 'submit' | 'new-round' }
 
 function reducer(state: IGameState, action: IAction): IGameState {
   function checkpoint(type: 'add' | 'del' | 'submit') {
@@ -32,7 +32,9 @@ function reducer(state: IGameState, action: IAction): IGameState {
       case 'del':
         return state.position.col === 0
       case 'submit':
-        return state.position.row === CONFIG.max_attempts
+        return (
+          state.position.row === CONFIG.max_attempts || state.position.col === 0
+        )
     }
   }
 
@@ -121,6 +123,14 @@ function reducer(state: IGameState, action: IAction): IGameState {
 
       return newState
     }
+    case 'new-round': {
+      const newState = JSON.parse(JSON.stringify(initialState)) as IGameState
+      newState.msg = null
+      newState.board = newState.board.map((word) =>
+        word.map(() => ({ value: '', state: 'initial' }))
+      )
+      return newState
+    }
   }
 }
 
@@ -136,6 +146,10 @@ export default function useGame() {
     },
     submit() {
       dispatch({ type: 'submit' })
+    },
+    newRound() {
+      dispatch({ type: 'new-round' })
+      wordle.setNewRandomWord()
     },
   }
 
