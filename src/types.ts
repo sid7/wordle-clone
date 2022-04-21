@@ -23,3 +23,9 @@ export interface IGameState {
     type: IMsgType
   } | null
 }
+/**
+ * temp type for html native dialog
+ */
+export type IDialogElement = {
+  [k in 'open' | 'close' | 'showModal']: () => void
+} & HTMLDialogElement

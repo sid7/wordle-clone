@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import Navbar from './components/navbar'
 import Keypad from './components/keypad'
 import Word from './components/word'
+import Info from './components/info'
+import { Portal } from './components/utils'
 import useGame from './hooks/game'
 import { wordIs } from './scripts/helper'
 
@@ -31,6 +33,7 @@ export default function App() {
         </p>
         <button
           type="button"
+          className="btn"
           disabled={state.status === 'running'}
           aria-hidden={state.status === 'running'}
           ref={newRound}
@@ -40,8 +43,10 @@ export default function App() {
           New Round
         </button>
       </div>
-
       <Keypad handle={handle} hints={state.hints} />
+      <Portal target="info-modal">
+        <Info />
+      </Portal>
     </>
   )
 }
