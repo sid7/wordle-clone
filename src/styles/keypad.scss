@@ -16,8 +16,10 @@
 }
 
 .key {
+  block-size: 50px;
   flex: 1;
-  font-size: 1.2rem;
+  padding: 0;
+  font-size: 14px;
   background-color: get-color('text', 0.08);
   text-transform: uppercase;
 
@@ -38,5 +40,12 @@
       background-color: get-color($state);
       border-color: get-color($state);
     }
+  }
+}
+
+@include breakpoint-up('md') {
+  .key {
+    block-size: 40px;
+    font-size: 1.2rem;
   }
 }
