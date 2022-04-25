@@ -16,7 +16,7 @@
 }
 
 .key {
-  block-size: 50px;
+  block-size: 40px;
   flex: 1;
   padding: 0;
   font-size: 14px;
@@ -40,6 +40,12 @@
       background-color: get-color($state);
       border-color: get-color($state);
     }
+  }
+}
+
+@include breakpoint-up('xs') {
+  .key {
+    block-size: 50px;
   }
 }
 

@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  block-size: 50px;
+  block-size: 42px;
   inline-size: 50px;
   border: 2px solid;
   text-transform: capitalize;
@@ -45,5 +45,11 @@
       background-color: get-color($state);
       border-color: get-color($state);
     }
+  }
+}
+
+@include breakpoint-up('xs') {
+  .letter {
+    block-size: 50px;
   }
 }
